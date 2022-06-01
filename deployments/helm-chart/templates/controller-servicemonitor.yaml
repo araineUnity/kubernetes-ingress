@@ -8,6 +8,6 @@ metadata:
 spec:
   selector:
     matchLabels:
-  {{- toYaml .Values.controller.serviceMonitor.selectorLabels | nindent 6 }}
+  {{- toYaml .Values.controller.serviceMonitor.selectorMatchLabels | nindent 6 }}
   endpoints:
   {{- toYaml .Values.controller.serviceMonitor.endpoints | nindent 4 }}
