@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- toYaml .Values.controller.serviceMonitor.labels | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+  {{- toYaml .Values.controller.serviceMonitor.selectorLabels | nindent 6 }}
+  endpoints:
+  {{- toYaml .Values.controller.serviceMonitor.endpoints | nindent 4 }}
