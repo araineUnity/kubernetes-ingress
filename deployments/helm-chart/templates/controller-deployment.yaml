@@ -50,6 +50,10 @@ spec:
       affinity:
 {{ toYaml .Values.controller.affinity | indent 8 }}
 {{- end }}
+{{- if .Values.controller.topologySpreadConstraints }}
+      topologySpreadConstraints:
+{{ toYaml .Values.controller.topologySpreadConstraints | indent 8 }}
+{{- end }}
 {{- if or (.Values.controller.volumes) (.Values.nginxServiceMesh.enable) }}
       volumes:
 {{- end }}
@@ -189,6 +193,7 @@ spec:
           - -enable-preview-policies={{ .Values.controller.enablePreviewPolicies }}
           - -enable-cert-manager={{ .Values.controller.enableCertManager }}
           - -enable-oidc={{ .Values.controller.enableOIDC }}
+          - -enable-external-dns={{ .Values.controller.enableExternalDNS }}
 {{- if .Values.controller.globalConfiguration.create }}
           - -global-configuration=$(POD_NAMESPACE)/{{ include "nginx-ingress.name" . }}
 {{- end }}
